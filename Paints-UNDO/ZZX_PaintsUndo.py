@@ -50,6 +50,8 @@ class ZZX_PaintsUndo:
     def initialize_models(self):
         os.environ['HF_HOME'] = os.path.join(os.path.dirname(__file__), 'hf_download')
         dtype = torch.float16
+        if os.path.exists('/stable-diffusion-cache/models/paints_undo_single_frame'):
+            self.model_name = '/stable-diffusion-cache/models/paints_undo_single_frame'
 
         self.tokenizer = CLIPTokenizer.from_pretrained(self.model_name, subfolder="tokenizer")
         self.text_encoder = CLIPTextModel.from_pretrained(self.model_name, subfolder="text_encoder").to(dtype)
